@@ -23,10 +23,15 @@ def draw_bounding_box(img, class_id, confidence, x, y, x_plus_w, y_plus_h):
     cv2.putText(img, label+" " +confi , (x-10,y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,255,0), 2)
 
 # Initialiser la caméra
-cap = cv2.VideoCapture(0)
+# cap = cv2.VideoCapture(0)
+# Initialiser le flux vidéo
+cap = cv2.VideoCapture("udp://localhost:12345")
 
 while True:
     ret, frame = cap.read()
+    if not ret:
+        print("Erreur : Impossible de lire la vidéo")
+        break
     Width, Height = frame.shape[1], frame.shape[0]
     scale = 0.00392
 
